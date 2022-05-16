@@ -2,8 +2,8 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoFooter></TodoFooter>
-    <TodoList></TodoList>
+    <TodoList v-bind:propsdata="todoItems" @removeTodo="removeTodo"></TodoList>
+    <TodoFooter v-on:removeAll="clearAll"></TodoFooter>
   </div>
 </template>
 
@@ -14,6 +14,7 @@
   import TodoFooter from "./components/TodoFooter";
 
   export default {
+    props:["propsdata"],
     components: {
       "TodoHeader": TodoHeader,
       "TodoInput": TodoInput,
@@ -23,6 +24,20 @@
     data() {
       return {
         todoItems: []
+      }
+    },
+    methods:{
+      addTodo(todoItem){
+        localStorage.setItem(todoItem, todoItem);
+        this.todoItems.push(todoItem);
+      },
+      clearAll(){
+        localStorage.clear();
+        this.todoItems = [];
+      },
+      removeTodo(todoItem, index) {
+        localStorage.removeItem(todoItem);
+        this.todoItems.splice(index, 1);
       }
     },
     created() {
