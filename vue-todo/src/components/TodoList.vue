@@ -14,7 +14,7 @@
 
 <script>
   export default {
-    props: ["propsdata"],
+    props: ['propsdata'],
     methods: {
       removeTodo(todoItem, index) {
         this.$emit('removeTodo', todoItem, index);
@@ -23,14 +23,13 @@
   }
 </script>
 
-<style>
+<style scoped>
   ul {
     list-style-type: none;
     padding-left: 0px;
     margin-top: 0;
     text-align: left;
   }
-
   li {
     display: flex;
     min-height: 50px;
@@ -41,15 +40,21 @@
     background: white;
     border-radius: 5px;
   }
-
   .checkBtn {
     line-height: 45px;
     color: #62acde;
     margin-right: 5px;
   }
-
   .removeBtn {
     margin-left: auto;
     color: #de4343;
+  }
+
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
   }
 </style>
